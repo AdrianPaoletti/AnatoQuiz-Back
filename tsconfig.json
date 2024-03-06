@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "esnext",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "strict": true,
+    "noEmit": false,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "moduleDetection": "auto",
+    "outDir": "dist",
+    "rootDir": ".",
+  },
+  "exclude": [
+    "./dist",
+    "node_modules",
+  ],
+}
