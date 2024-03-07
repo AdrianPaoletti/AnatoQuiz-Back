@@ -9,6 +9,7 @@ import { UserAdministrator } from "../../domain/userAdministrator";
 import { UserEmail } from "../../domain/userEmail";
 import { UserName } from "../../domain/userName";
 import { UserRepository } from "../../domain/userRepository.interface";
+import { UserGoogle } from "../../../shared/domain/user/userGoogle";
 
 @injectable()
 export class UserSignUpper {
@@ -24,6 +25,7 @@ export class UserSignUpper {
     password,
     administrator,
     active,
+    google
   }: {
     id: UserId;
     userName: UserName;
@@ -31,6 +33,7 @@ export class UserSignUpper {
     password: UserPassword;
     administrator: UserAdministrator;
     active: UserActive;
+    google: UserGoogle
   }): Promise<void> {
     const user = User.create(
       id,
@@ -39,7 +42,9 @@ export class UserSignUpper {
       password,
       administrator,
       active,
+      google
     );
+
     await this.mongoUserRepository.save(user);
   }
 }

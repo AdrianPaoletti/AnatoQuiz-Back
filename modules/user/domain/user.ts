@@ -5,6 +5,7 @@ import { UserPassword } from "../../shared/domain/user/userPassword";
 import { UserActive } from "./userActive";
 import { UserAdministrator } from "./userAdministrator";
 import { UserEmail } from "./userEmail";
+import { UserGoogle } from "../../shared/domain/user/userGoogle";
 import { UserName } from "./userName";
 import { UserPrimitives } from "./userPrimitives.interface";
 
@@ -15,6 +16,7 @@ export class User extends AggregateRoot {
   public readonly password: UserPassword;
   public readonly administrator: UserAdministrator;
   public readonly active: UserActive;
+  public readonly google: UserGoogle;
 
   constructor(
     id: UserId,
@@ -23,6 +25,7 @@ export class User extends AggregateRoot {
     password: UserPassword,
     administrator: UserAdministrator,
     active: UserActive,
+    google: UserGoogle
   ) {
     super();
     this.id = id;
@@ -31,6 +34,7 @@ export class User extends AggregateRoot {
     this.password = password;
     this.administrator = administrator;
     this.active = active;
+    this.google = google;
   }
 
   static create(
@@ -40,8 +44,9 @@ export class User extends AggregateRoot {
     password: UserPassword,
     administrator: UserAdministrator,
     active: UserActive,
+    google: UserGoogle
   ): User {
-    const user = new User(id, userName, email, password, administrator, active);
+    const user = new User(id, userName, email, password, administrator, active, google);
 
     return user;
   }
@@ -53,6 +58,7 @@ export class User extends AggregateRoot {
     password,
     administrator,
     active,
+    google
   }: UserPrimitives): User {
     return new User(
       new UserId(id),
@@ -61,6 +67,7 @@ export class User extends AggregateRoot {
       new UserPassword(password),
       new UserAdministrator(administrator),
       new UserActive(active),
+      new UserGoogle(google)
     );
   }
 
@@ -72,6 +79,7 @@ export class User extends AggregateRoot {
       password: this.password.value,
       administrator: this.administrator.value,
       active: this.active.value,
+      google: this.google.value
     };
   }
 }

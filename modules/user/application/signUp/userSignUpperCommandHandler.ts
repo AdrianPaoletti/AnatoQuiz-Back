@@ -12,6 +12,7 @@ import { UserName } from "../../domain/userName";
 
 import { UserSignUpper } from "./userSignUpper";
 import { UserSignUpperCommand } from "./userSignUpperCommand";
+import { UserGoogle } from "../../../shared/domain/user/userGoogle";
 
 @injectable()
 export class UserSignUpperCommandHandler
@@ -33,6 +34,7 @@ export class UserSignUpperCommandHandler
     const password = new UserPassword(command.password);
     const administrator = new UserAdministrator(command.administrator);
     const active = new UserActive(command.active);
+    const google = new UserGoogle(command.google);
 
     await this.userSignUpper.run({
       id,
@@ -41,6 +43,7 @@ export class UserSignUpperCommandHandler
       password,
       administrator,
       active,
+      google
     });
   }
 }

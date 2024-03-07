@@ -9,7 +9,7 @@ import { QueryBus } from "../modules/shared/domain/queryBus.interface";
 import { UserInvalidAuthCredentials } from "../modules/shared/domain/user/userInvalidAuthCredentials";
 import { UsersFinderQuery } from "../modules/user/application/find/usersFinderQuery";
 import { UsersResponse } from "../modules/user/application/userResponse";
-import { UserAuthenticatorQuery } from "../modules/userAuth/application/authenticate/userAuthenticatorQuery";
+import { UserAuthenticatorQuery } from "../modules/auth/application/authenticate/userAuthenticatorQuery";
 
 import { Controller } from "./controller.interface";
 
@@ -34,6 +34,7 @@ export class UserAuthenticatorGetController implements Controller {
         password,
         user.password,
         user.id,
+        user.google
       );
       const {
         userAuth: { token },

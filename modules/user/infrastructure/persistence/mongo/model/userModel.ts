@@ -7,6 +7,7 @@ export interface IUser {
   password: string;
   administrator?: boolean;
   active?: boolean;
+  google: boolean;
 }
 
 const userSchema: Schema<IUser> = new Schema(
@@ -15,8 +16,9 @@ const userSchema: Schema<IUser> = new Schema(
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true },
     password: { type: String, required: true },
-    administrator: { type: Boolean, required: false, default: false },
+    administrator: { type: Boolean, required: true, default: false },
     active: { type: Boolean, required: false, default: false },
+    google: { type: Boolean, required: true, default: false },
   },
   {
     versionKey: false,

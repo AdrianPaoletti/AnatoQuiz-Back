@@ -5,4 +5,5 @@ export interface UserPrimitives {
   password: string;
   administrator: boolean;
   active: boolean;
+  google: boolean;
 }

@@ -2,10 +2,10 @@ import { Container } from "inversify";
 
 import { Controller } from "../../controllers/controller.interface";
 import { UserAuthenticatorGetController } from "../../controllers/userAuthenticatorGet.controller";
-import { UserAuthenticator } from "../../modules/userAuth/application/authenticate/userAuthenticator";
-import { UserAuthorizator } from "../../modules/userAuth/application/authorize/userAuthorizator";
-import { UserAuthRepository as IUserAuthenticatorRepository } from "../../modules/userAuth/domain/userAuthRepository.interface";
-import { UserAuthRepository } from "../../modules/userAuth/infrastructure/userAuthenticatorRepository";
+import { UserAuthenticator } from "../../modules/auth/application/authenticate/userAuthenticator";
+import { UserAuthorizator } from "../../modules/auth/application/authorize/userAuthorizator";
+import { UserAuthRepository as IUserAuthenticatorRepository } from "../../modules/auth/domain/userAuthRepository.interface";
+import { UserAuthRepository } from "../../modules/auth/infrastructure/userAuthenticatorRepository";
 
 import { USERSAUTH_INJECTIONS_TYPES } from "./usersAuth.types";
 

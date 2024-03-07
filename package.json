@@ -13,10 +13,6 @@
     "type": "git",
     "url": "https://github.com/AdrianPaoletti/AnatoQuiz.git"
   },
-  "workspaces": [
-    "src/apps/anatoquiz/frontend",
-    "src/apps/designSystem"
-  ],
   "dependencies": {
     "bcrypt": "^5.1.1",
     "compression": "^1.7.4",

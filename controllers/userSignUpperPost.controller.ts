@@ -18,6 +18,7 @@ type UserSignUpperRequest = Request & {
     password: string;
     id: string;
     administrator?: boolean;
+    google?: boolean;
   };
 };
 const debug = Debug("anatoquiz:userSignUpperPostController");
@@ -31,7 +32,7 @@ export class UserSignUpperPostController implements Controller {
 
   public async run(req: UserSignUpperRequest, res: Response): Promise<void> {
     try {
-      const { id, username, email, password, administrator } = req.body;
+      const { id, username, email, password, administrator, google } = req.body;
       const userSignUpperCommand = new UserSignUpperCommand({
         id,
         username,
@@ -39,6 +40,7 @@ export class UserSignUpperPostController implements Controller {
         password: bcrypt.hashSync(password, 10),
         administrator: !!administrator,
         active: true,
+        google: !!google
       });
 
       await this.inMemoryCommandBus.dispatch(userSignUpperCommand);

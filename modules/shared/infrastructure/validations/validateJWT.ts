@@ -5,7 +5,7 @@ import { inject, injectable } from "inversify";
 import { SHARED_INJECTIONS_TYPES } from "../../../../dependencyInjection/shared/shared.types";
 import { UsersFinderQuery } from "../../../user/application/find/usersFinderQuery";
 import { UsersResponse } from "../../../user/application/userResponse";
-import { UserAuthorizatorQuery } from "../../../userAuth/application/authorize/userAuthorizatorQuery";
+import { UserAuthorizatorQuery } from "../../../auth/application/authorize/userAuthorizatorQuery";
 import { FilterType } from "../../domain/criteria/filter";
 import { QueryBus } from "../../domain/queryBus.interface";
 

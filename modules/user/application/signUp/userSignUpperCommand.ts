@@ -8,6 +8,7 @@ export class UserSignUpperCommand extends Command {
   readonly password: string;
   readonly administrator: boolean;
   readonly active: boolean;
+  readonly google: boolean;
 
   constructor({
     id,
@@ -16,6 +17,7 @@ export class UserSignUpperCommand extends Command {
     password,
     administrator,
     active,
+    google
   }: UserPrimitives) {
     super();
     this.id = id;
@@ -24,5 +26,6 @@ export class UserSignUpperCommand extends Command {
     this.password = password;
     this.administrator = administrator;
     this.active = active;
+    this.google = google;
   }
 }

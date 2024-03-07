@@ -15,8 +15,8 @@ import { QueryHandlers } from "../../modules/shared/infrastructure/queryBus/quer
 import { ValidateJWT } from "../../modules/shared/infrastructure/validations/validateJWT";
 import { UsersFinderQueryHandler } from "../../modules/user/application/find/usersFinderQueryHandler";
 import { UserSignUpperCommandHandler } from "../../modules/user/application/signUp/userSignUpperCommandHandler";
-import { UserAuthenticatorQueryHandler } from "../../modules/userAuth/application/authenticate/userAuthenticatorQueryHandler";
-import { UserAuthorizatorQueryHandler } from "../../modules/userAuth/application/authorize/userAuthorizatorQueryHandler";
+import { UserAuthenticatorQueryHandler } from "../../modules/auth/application/authenticate/userAuthenticatorQueryHandler";
+import { UserAuthorizatorQueryHandler } from "../../modules/auth/application/authorize/userAuthorizatorQueryHandler";
 
 import { SHARED_INJECTIONS_TYPES } from "./shared.types";
 

@@ -15,6 +15,7 @@ interface UserDocument {
   password: string;
   administrator: boolean;
   active: boolean;
+  google: boolean;
 }
 
 decorate(injectable(), MongoDBRepository<User>);
@@ -31,7 +32,7 @@ export class MongoUserRepository
     const documents = await this.searchByCriteria<UserDocument>(criteria);
 
     return documents.map(
-      ({ _id: id, username, email, password, administrator, active }) =>
+      ({ _id: id, username, email, password, administrator, active, google }) =>
         User.fromPrimitives({
           id,
           username,
@@ -39,6 +40,7 @@ export class MongoUserRepository
           password,
           administrator,
           active,
+          google
         }),
     );
   }
