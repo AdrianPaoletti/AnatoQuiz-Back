@@ -28,10 +28,9 @@ export class UserAuthenticatorQueryHandler
     const password = new UserPassword(query.password);
     const hashedPassword = new UserPassword(query.hashedPassword);
     const id = new UserId(query.id);
-    const google = new UserGoogle(query.google);
 
     return new UserAuthResponse(
-      await this.userAuthenticator.run(password, hashedPassword, id, google),
+      await this.userAuthenticator.run(password, hashedPassword, id),
     );
   }
 }

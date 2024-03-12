@@ -4,12 +4,10 @@ export class UserAuthenticatorQuery implements Query {
   readonly password;
   readonly hashedPassword;
   readonly id;
-  readonly google;
 
-  constructor(password: string, hashedPassword: string, id: string, google: boolean) {
+  constructor(password: string, hashedPassword: string, id: string) {
     this.password = password;
     this.hashedPassword = hashedPassword;
     this.id = id;
-    this.google = google;
   }
 }

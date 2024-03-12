@@ -34,7 +34,6 @@ export class UserAuthenticatorGetController implements Controller {
         password,
         user.password,
         user.id,
-        user.google
       );
       const {
         userAuth: { token },

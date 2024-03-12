@@ -6,7 +6,6 @@ import { UserInvalidAuthCredentials } from "../../../shared/domain/user/userInva
 import { UserPassword } from "../../../shared/domain/user/userPassword";
 import { UserAuth } from "../../domain/userAuth";
 import { UserAuthRepository } from "../../domain/userAuthRepository.interface";
-import { UserGoogle } from "../../../shared/domain/user/userGoogle";
 
 @injectable()
 export class UserAuthenticator {
@@ -19,11 +18,8 @@ export class UserAuthenticator {
     password: UserPassword,
     hashedPassword: UserPassword,
     id: UserId,
-    google: UserGoogle,
   ): Promise<UserAuth> {
-    if (!google.value) {
-      this.ensurePasswordIsValid(password.value, hashedPassword.value);
-    }
+    this.ensurePasswordIsValid(password.value, hashedPassword.value);
 
     const token = await this.userAuthRepository.generateToken(id.value);
 
