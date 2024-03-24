@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "24a1231b-5194-4c30-b316-c9f643ae84bf",
+		"name": "Quiz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17929093"
+	},
+	"item": [
+		{
+			"name": "User - SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"34e6b331-1722-44dc-a489-4b2d49eec51c\",\r\n    \"username\": \"testii\",\r\n    \"password\": \"$2a$10$wYdIIguBTTHm1sGhZJEdVu4bncCmwot80REtvoH/V2vn3.eIeprX6\",\r\n    \"email\": \"emailiico@email.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/signup",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"token\", pm.response.json().token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/login?email=emailiico@email.com&password=testA1*AAAa",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "emailiico@email.com"
+						},
+						{
+							"key": "password",
+							"value": "testA1*AAAa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Question - Find",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/question?lessons=[\"1\", \"3\"]&questionsNumber=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"question"
+					],
+					"query": [
+						{
+							"key": "lessons",
+							"value": "[\"1\", \"3\"]"
+						},
+						{
+							"key": "questionsNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OPT - Create",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"34e6b331-1722-44dc-a489-4b2d49eec51c\",\r\n    \"email\": \"emailiico@email.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/opt/create",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"opt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
