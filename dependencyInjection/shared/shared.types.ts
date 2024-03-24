@@ -7,4 +7,5 @@ export const SHARED_INJECTIONS_TYPES = {
   QueryHandlers: Symbol.for("QueryHandlers"),
   AuthorizationMiddleware: Symbol.for("AuthorizationMiddleware"),
   ValidateJWT: Symbol.for("ValidateJWT"),
+  DomainEventsSubscriber: Symbol.for("DomainEventsSubscriber"),
 };

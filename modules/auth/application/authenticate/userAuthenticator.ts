@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 
-import { USERSAUTH_INJECTIONS_TYPES } from "../../../../dependencyInjection/usersAuth/usersAuth.types";
+import { USERSAUTH_INJECTIONS_TYPES } from "../../../../dependencyInjection/auth/usersAuth.types";
 import { UserId } from "../../../shared/domain/user/userId";
 import { UserInvalidAuthCredentials } from "../../../shared/domain/user/userInvalidAuthCredentials";
 import { UserPassword } from "../../../shared/domain/user/userPassword";

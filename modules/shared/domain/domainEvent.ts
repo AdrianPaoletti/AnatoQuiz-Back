@@ -1,6 +1,15 @@
 import { Uuid } from "./valueObjects/uuid";
 
 type DomainEventAttributes = any;
+// export type DomainEventClass = {
+//   EVENT_NAME: string;
+//   fromPrimitives(params: {
+//     aggregateId: string;
+//     eventId: string;
+//     occurredOn: Date;
+//     attributes: DomainEventAttributes;
+//   }): DomainEvent;
+// };
 
 export abstract class DomainEvent {
   static EVENT_NAME: string;
@@ -31,13 +40,3 @@ export abstract class DomainEvent {
 
   abstract toPrimitives(): DomainEventAttributes;
 }
-
-export type DomainEventClass = {
-  EVENT_NAME: string;
-  fromPrimitives(params: {
-    aggregateId: string;
-    eventId: string;
-    occurredOn: Date;
-    attributes: DomainEventAttributes;
-  }): DomainEvent;
-};

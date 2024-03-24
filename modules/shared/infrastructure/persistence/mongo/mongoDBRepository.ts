@@ -28,6 +28,14 @@ export abstract class MongoDBRepository<T extends AggregateRoot> {
     });
   }
 
+  protected async searchOneByCriteria<D>(
+    criteria: Criteria,
+  ): Promise<D | null> {
+    const { filter } = this.criteriaConverter.convert(criteria);
+
+    return await this.ModelDB.findOne(filter);
+  }
+
   protected async searchByCriteria<D>(criteria: Criteria): Promise<D[]> {
     const { filter, sort, skip, limit } =
       this.criteriaConverter.convert(criteria);

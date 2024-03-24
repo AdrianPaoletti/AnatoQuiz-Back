@@ -1,7 +1,7 @@
 import { Container } from "inversify";
 
 import { Controller } from "../../controllers/controller.interface";
-import { QuestionsGetController } from "../../controllers/questionsGet.controller";
+import { QuestionsGetController } from "../../controllers/question/questionsGet.controller";
 import { QuestionsFinder } from "../../modules/question/application/find/questionsFinder";
 import { QuestionRepository } from "../../modules/question/domain/questionRepository.interface";
 import { MongoQuestionRepository } from "../../modules/question/infrastructure/persistence/mongo/mongoQuestionRepository";

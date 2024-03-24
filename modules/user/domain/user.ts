@@ -1,11 +1,11 @@
 import { AggregateRoot } from "../../shared/domain/aggregateRoot";
+import { UserEmail } from "../../shared/domain/user/userEmail";
+import { UserGoogle } from "../../shared/domain/user/userGoogle";
 import { UserId } from "../../shared/domain/user/userId";
 import { UserPassword } from "../../shared/domain/user/userPassword";
 
 import { UserActive } from "./userActive";
 import { UserAdministrator } from "./userAdministrator";
-import { UserEmail } from "./userEmail";
-import { UserGoogle } from "../../shared/domain/user/userGoogle";
 import { UserName } from "./userName";
 import { UserPrimitives } from "./userPrimitives.interface";
 
@@ -25,7 +25,7 @@ export class User extends AggregateRoot {
     password: UserPassword,
     administrator: UserAdministrator,
     active: UserActive,
-    google: UserGoogle
+    google: UserGoogle,
   ) {
     super();
     this.id = id;
@@ -44,9 +44,17 @@ export class User extends AggregateRoot {
     password: UserPassword,
     administrator: UserAdministrator,
     active: UserActive,
-    google: UserGoogle
+    google: UserGoogle,
   ): User {
-    const user = new User(id, userName, email, password, administrator, active, google);
+    const user = new User(
+      id,
+      userName,
+      email,
+      password,
+      administrator,
+      active,
+      google,
+    );
 
     return user;
   }
@@ -58,7 +66,7 @@ export class User extends AggregateRoot {
     password,
     administrator,
     active,
-    google
+    google,
   }: UserPrimitives): User {
     return new User(
       new UserId(id),
@@ -67,7 +75,7 @@ export class User extends AggregateRoot {
       new UserPassword(password),
       new UserAdministrator(administrator),
       new UserActive(active),
-      new UserGoogle(google)
+      new UserGoogle(google),
     );
   }
 
@@ -79,7 +87,7 @@ export class User extends AggregateRoot {
       password: this.password.value,
       administrator: this.administrator.value,
       active: this.active.value,
-      google: this.google.value
+      google: this.google.value,
     };
   }
 }

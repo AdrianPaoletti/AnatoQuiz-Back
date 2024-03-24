@@ -4,8 +4,8 @@ import { Operator } from "../../../domain/criteria/filterOperator";
 import { Filters } from "../../../domain/criteria/filters";
 import { Order } from "../../../domain/criteria/order";
 
-type MongoFilterOperator = "$eq" | "$ne" | "$gt" | "$lt";
-type MongoFilterValue = boolean | string | number;
+type MongoFilterOperator = "$eq" | "$ne" | "$gt" | "$lt" | "$in";
+type MongoFilterValue = boolean | string | number | Array<string | number>;
 type MongoFilterOperation = {
   [operator in MongoFilterOperator]?: MongoFilterValue;
 };
@@ -33,7 +33,10 @@ export class MongoDBCriteriaConverter {
     this.filterTransformers = new Map<
       Operator,
       TransformerFunction<Filter, MongoFilter>
-    >([[Operator.EQUAL, this.equalFilter]]);
+    >([
+      [Operator.EQUAL, this.equalFilter],
+      [Operator.IN, this.inFilter],
+    ]);
   }
 
   public convert(criteria: Criteria): MongoQuery {
@@ -72,6 +75,10 @@ export class MongoDBCriteriaConverter {
 
   private equalFilter(filter: Filter): MongoFilter {
     return { [filter.field.value]: { $eq: filter.value.value } };
+  }
+
+  private inFilter(filter: Filter): MongoFilter {
+    return { [filter.field.value]: { $in: filter.value.value } };
   }
 
   private inactiveFilter(): MongoFilter {

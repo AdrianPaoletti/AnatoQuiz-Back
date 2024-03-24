@@ -9,7 +9,7 @@ export interface Answer {
 export interface IQuestion {
   _id: string;
   subject: string;
-  lesson: string;
+  lessons: Array<string>;
   question: string;
   answers: Array<Answer>;
   difficulty: number;
@@ -26,7 +26,7 @@ const questionSchema: Schema<IQuestion> = new Schema(
   {
     _id: { type: String, required: true },
     subject: { type: String, required: true },
-    lesson: { type: String, required: true },
+    lessons: { type: [String], required: true },
     question: { type: String, required: true },
     answers: [questionAnswer],
     difficulty: { type: Number, required: false, default: 1 },

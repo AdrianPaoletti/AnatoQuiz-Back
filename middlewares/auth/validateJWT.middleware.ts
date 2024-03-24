@@ -2,12 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 import { inject, injectable } from "inversify";
 
-import { SHARED_INJECTIONS_TYPES } from "../../../../dependencyInjection/shared/shared.types";
-import { UsersFinderQuery } from "../../../user/application/find/usersFinderQuery";
-import { UsersResponse } from "../../../user/application/userResponse";
-import { UserAuthorizatorQuery } from "../../../auth/application/authorize/userAuthorizatorQuery";
-import { FilterType } from "../../domain/criteria/filter";
-import { QueryBus } from "../../domain/queryBus.interface";
+import { SHARED_INJECTIONS_TYPES } from "../../dependencyInjection/shared/shared.types";
+import { UserAuthorizatorQuery } from "../../modules/auth/application/authorize/userAuthorizatorQuery";
+import { QueryBus } from "../../modules/shared/domain/queryBus.interface";
+import { UsersFinderQuery } from "../../modules/user/application/find/usersFinderQuery";
+import { UserResponse } from "../../modules/user/application/userResponse";
 
 @injectable()
 export class ValidateJWT {
@@ -27,8 +26,8 @@ export class ValidateJWT {
         userAuth: { id },
       } = await this.inMemoryQueryBus.ask(authQuery);
 
-      const userQuery = new UsersFinderQuery(this.buildFilter(id));
-      await this.inMemoryQueryBus.ask<UsersResponse>(userQuery);
+      const userQuery = new UsersFinderQuery({ _id: id });
+      await this.inMemoryQueryBus.ask<UserResponse>(userQuery);
 
       next();
     } catch (error) {
@@ -36,15 +35,5 @@ export class ValidateJWT {
         .status(httpStatus.UNAUTHORIZED)
         .json({ error: (error as Error).message });
     }
-  }
-
-  private buildFilter(id: string): FilterType[] {
-    return [
-      {
-        field: "_id",
-        value: id,
-        operator: "=",
-      },
-    ];
   }
 }

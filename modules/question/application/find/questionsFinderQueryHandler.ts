@@ -26,7 +26,6 @@ export class QuesitonsFinderQueryHandler
   async handle(query: QuestionsFinderQuery): Promise<QuestionsResponse> {
     const filters = Filters.fromValues(query.filters);
     const order = Order.fromValues(query.orderBy, query.orderType);
-
     const questions = await this.questionsFinder.run(
       filters,
       order,

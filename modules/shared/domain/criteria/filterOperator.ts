@@ -8,6 +8,7 @@ export enum Operator {
   NOT_EQUAL = "!=",
   GT = ">",
   LT = "<",
+  IN = "in",
 }
 
 export class FilterOperator extends EnumValueObject<Operator> {

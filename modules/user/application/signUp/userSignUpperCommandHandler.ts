@@ -3,16 +3,16 @@ import { inject, injectable } from "inversify";
 import { USERS_INJECTIONS_TYPES } from "../../../../dependencyInjection/users/users.types";
 import { Command } from "../../../shared/domain/command";
 import { CommandHandler } from "../../../shared/domain/commandHandler.interface";
+import { UserEmail } from "../../../shared/domain/user/userEmail";
+import { UserGoogle } from "../../../shared/domain/user/userGoogle";
 import { UserId } from "../../../shared/domain/user/userId";
 import { UserPassword } from "../../../shared/domain/user/userPassword";
 import { UserActive } from "../../domain/userActive";
 import { UserAdministrator } from "../../domain/userAdministrator";
-import { UserEmail } from "../../domain/userEmail";
 import { UserName } from "../../domain/userName";
 
 import { UserSignUpper } from "./userSignUpper";
 import { UserSignUpperCommand } from "./userSignUpperCommand";
-import { UserGoogle } from "../../../shared/domain/user/userGoogle";
 
 @injectable()
 export class UserSignUpperCommandHandler
@@ -43,7 +43,7 @@ export class UserSignUpperCommandHandler
       password,
       administrator,
       active,
-      google
+      google,
     });
   }
 }

@@ -9,16 +9,26 @@ export class QuestionsFinderQuery implements Query {
   readonly offset?: number;
 
   constructor(
-    filters: FilterType[],
+    lessons: string[],
     orderBy?: string,
     orderType?: string,
-    limit?: number,
+    questionsNumber?: number,
     offset?: number,
   ) {
-    this.filters = filters;
+    this.filters = this.buildFilters(lessons);
     this.orderBy = orderBy;
     this.orderType = orderType;
-    this.limit = limit;
+    this.limit = questionsNumber;
     this.offset = offset;
+  }
+
+  private buildFilters(lessons: string[]): FilterType[] {
+    return [
+      {
+        field: "lessons",
+        value: lessons,
+        operator: "in",
+      },
+    ];
   }
 }

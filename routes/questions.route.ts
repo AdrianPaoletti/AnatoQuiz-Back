@@ -1,10 +1,10 @@
 import { Express, NextFunction, Request, Response } from "express";
 
-import { QuestionsGetController } from "../controllers/questionsGet.controller";
+import { QuestionsGetController } from "../controllers/question/questionsGet.controller";
 import { container } from "../dependencyInjection";
 import { QUESTIONS_INJECTIONS_TYPES } from "../dependencyInjection/questions/questions.types";
 import { SHARED_INJECTIONS_TYPES } from "../dependencyInjection/shared/shared.types";
-import { ValidateJWT } from "../modules/shared/infrastructure/validations/validateJWT";
+import { ValidateJWT } from "../middlewares/auth/validateJWT.middleware";
 
 export function register(app: Express) {
   const questionsGetController = container.get<QuestionsGetController>(

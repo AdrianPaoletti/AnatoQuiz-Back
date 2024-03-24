@@ -1,15 +1,13 @@
-import bcrypt from "bcrypt";
 import Debug from "debug";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { inject, injectable } from "inversify";
 
-import { SHARED_INJECTIONS_TYPES } from "../dependencyInjection/shared/shared.types";
-import { CommandBus } from "../modules/shared/domain/commandBus.interface";
-import { MongoDBError } from "../modules/shared/infrastructure/persistence/mongo/mongoDBError";
-import { UserSignUpperCommand } from "../modules/user/application/signUp/userSignUpperCommand";
-
-import { Controller } from "./controller.interface";
+import { SHARED_INJECTIONS_TYPES } from "../../dependencyInjection/shared/shared.types";
+import { CommandBus } from "../../modules/shared/domain/commandBus.interface";
+import { MongoDBError } from "../../modules/shared/infrastructure/persistence/mongo/mongoDBError";
+import { UserSignUpperCommand } from "../../modules/user/application/signUp/userSignUpperCommand";
+import { Controller } from "../controller.interface";
 
 type UserSignUpperRequest = Request & {
   body: {
@@ -37,10 +35,10 @@ export class UserSignUpperPostController implements Controller {
         id,
         username,
         email,
-        password: bcrypt.hashSync(password, 10),
+        password,
         administrator: !!administrator,
         active: true,
-        google: !!google
+        google: !!google,
       });
 
       await this.inMemoryCommandBus.dispatch(userSignUpperCommand);

@@ -1,6 +1,7 @@
 export type Primitives =
   | String
   | string
+  | string[]
   | number
   | Boolean
   | boolean

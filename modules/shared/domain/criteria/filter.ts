@@ -3,7 +3,7 @@ import { FilterOperator } from "./filterOperator";
 import { FilterValue } from "./filterValue";
 
 export interface FilterType {
-  value: string;
+  value: string | string[] | boolean;
   operator: string;
   field: string;
 }

@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 
-import { USERSAUTH_INJECTIONS_TYPES } from "../../../../dependencyInjection/usersAuth/usersAuth.types";
+import { USERSAUTH_INJECTIONS_TYPES } from "../../../../dependencyInjection/auth/usersAuth.types";
 import { Query } from "../../../shared/domain/query";
 import { QueryHandler } from "../../../shared/domain/queryHandler.interface";
 import { UserId } from "../../../shared/domain/user/userId";
@@ -9,7 +9,6 @@ import { UserAuthResponse } from "../userAuthResponse";
 
 import { UserAuthenticator } from "./userAuthenticator";
 import { UserAuthenticatorQuery } from "./userAuthenticatorQuery";
-import { UserGoogle } from "../../../shared/domain/user/userGoogle";
 
 @injectable()
 export class UserAuthenticatorQueryHandler

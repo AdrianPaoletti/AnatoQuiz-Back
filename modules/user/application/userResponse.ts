@@ -1,10 +1,10 @@
 import { User } from "../domain/user";
 import { UserPrimitives } from "../domain/userPrimitives.interface";
 
-export class UsersResponse {
-  public readonly users: Array<UserPrimitives>;
+export class UserResponse {
+  public readonly user: UserPrimitives;
 
-  constructor(users: Array<User>) {
-    this.users = users.map((user) => user.toPrimitives());
+  constructor(user: User) {
+    this.user = user.toPrimitives();
   }
 }

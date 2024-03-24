@@ -12,7 +12,7 @@ import { QuestionSubject } from "./questionSubject";
 export class Question extends AggregateRoot {
   public readonly id: QuestionId;
   public readonly subject: QuestionSubject;
-  public readonly lesson: QuestionLesson;
+  public readonly lessons: QuestionLesson;
   public readonly question: QuestionQuestion;
   public readonly answers: Array<QuestionAnswer>;
   public readonly dificulty: QuestionDifficulty;
@@ -21,7 +21,7 @@ export class Question extends AggregateRoot {
   constructor(
     id: QuestionId,
     subject: QuestionSubject,
-    lesson: QuestionLesson,
+    lessons: QuestionLesson,
     question: QuestionQuestion,
     answers: Array<QuestionAnswer>,
     dificulty: QuestionDifficulty,
@@ -30,7 +30,7 @@ export class Question extends AggregateRoot {
     super();
     this.id = id;
     this.subject = subject;
-    this.lesson = lesson;
+    this.lessons = lessons;
     this.question = question;
     this.answers = answers;
     this.dificulty = dificulty;
@@ -40,7 +40,7 @@ export class Question extends AggregateRoot {
   static fromPrimitives({
     id,
     subject,
-    lesson,
+    lessons,
     question,
     answers,
     difficulty,
@@ -53,7 +53,7 @@ export class Question extends AggregateRoot {
     return new Question(
       new QuestionId(id),
       new QuestionSubject(subject),
-      new QuestionLesson(lesson),
+      new QuestionLesson(lessons),
       new QuestionQuestion(question),
       questionAnswers,
       new QuestionDifficulty(difficulty),
@@ -65,7 +65,7 @@ export class Question extends AggregateRoot {
     return {
       id: this.id.value,
       subject: this.subject.value,
-      lesson: this.lesson.value,
+      lessons: this.lessons.value,
       question: this.question.value,
       answers: this.answers.map((answer) => answer.toPrimitives()),
       difficulty: this.dificulty.value,

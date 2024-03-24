@@ -28,21 +28,32 @@ export class MongoUserRepository
     await this.persist(user.id.value, user);
   }
 
-  public async matching(criteria: Criteria): Promise<User[]> {
-    const documents = await this.searchByCriteria<UserDocument>(criteria);
+  public async matchingOne(criteria: Criteria): Promise<User | null> {
+    const user = await this.searchOneByCriteria<UserDocument>(criteria);
 
-    return documents.map(
-      ({ _id: id, username, email, password, administrator, active, google }) =>
-        User.fromPrimitives({
-          id,
-          username,
-          email,
-          password,
-          administrator,
-          active,
-          google
-        }),
-    );
+    if (!user) {
+      return null;
+    }
+
+    const {
+      _id: id,
+      username,
+      email,
+      password,
+      administrator,
+      active,
+      google,
+    } = user;
+
+    return User.fromPrimitives({
+      id,
+      username,
+      email,
+      password,
+      administrator,
+      active,
+      google,
+    });
   }
 
   protected modelDB(): Model<IUser> {

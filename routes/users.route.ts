@@ -1,6 +1,6 @@
 import { Express, Request, Response } from "express";
 
-import { UserSignUpperPostController } from "../controllers/userSignUpperPost.controller";
+import { UserSignUpperPostController } from "../controllers/user/userSignUpperPost.controller";
 import { container } from "../dependencyInjection";
 import { USERS_INJECTIONS_TYPES } from "../dependencyInjection/users/users.types";
 

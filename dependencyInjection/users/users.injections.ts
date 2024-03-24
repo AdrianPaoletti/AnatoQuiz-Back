@@ -1,7 +1,7 @@
 import { Container } from "inversify";
 
 import { Controller } from "../../controllers/controller.interface";
-import { UserSignUpperPostController } from "../../controllers/userSignUpperPost.controller";
+import { UserSignUpperPostController } from "../../controllers/user/userSignUpperPost.controller";
 import { UsersFinder } from "../../modules/user/application/find/usersFinder";
 import { UserSignUpper } from "../../modules/user/application/signUp/userSignUpper";
 import { UserRepository } from "../../modules/user/domain/userRepository.interface";

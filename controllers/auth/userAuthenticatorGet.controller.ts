@@ -3,15 +3,13 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { inject, injectable } from "inversify";
 
-import { SHARED_INJECTIONS_TYPES } from "../dependencyInjection/shared/shared.types";
-import { FilterType } from "../modules/shared/domain/criteria/filter";
-import { QueryBus } from "../modules/shared/domain/queryBus.interface";
-import { UserInvalidAuthCredentials } from "../modules/shared/domain/user/userInvalidAuthCredentials";
-import { UsersFinderQuery } from "../modules/user/application/find/usersFinderQuery";
-import { UsersResponse } from "../modules/user/application/userResponse";
-import { UserAuthenticatorQuery } from "../modules/auth/application/authenticate/userAuthenticatorQuery";
-
-import { Controller } from "./controller.interface";
+import { SHARED_INJECTIONS_TYPES } from "../../dependencyInjection/shared/shared.types";
+import { UserAuthenticatorQuery } from "../../modules/auth/application/authenticate/userAuthenticatorQuery";
+import { QueryBus } from "../../modules/shared/domain/queryBus.interface";
+import { UserInvalidAuthCredentials } from "../../modules/shared/domain/user/userInvalidAuthCredentials";
+import { UsersFinderQuery } from "../../modules/user/application/find/usersFinderQuery";
+import { UserResponse } from "../../modules/user/application/userResponse";
+import { Controller } from "../controller.interface";
 
 const debug = Debug("anatoquiz:userAuthGetController");
 
@@ -25,10 +23,8 @@ export class UserAuthenticatorGetController implements Controller {
   public async run(req: Request, res: Response): Promise<void> {
     try {
       const { email, password } = req.query as { [key: string]: string };
-      const userQuery = new UsersFinderQuery(this.buildFilter(email));
-      const {
-        users: [user],
-      } = await this.inMemoryQueryBus.ask<UsersResponse>(userQuery);
+      const userQuery = new UsersFinderQuery({ email });
+      const { user } = await this.inMemoryQueryBus.ask<UserResponse>(userQuery);
 
       const authQuery = new UserAuthenticatorQuery(
         password,
@@ -55,15 +51,5 @@ export class UserAuthenticatorGetController implements Controller {
         .status(httpStatus.BAD_REQUEST)
         .json({ error: (error as Error).message });
     }
-  }
-
-  private buildFilter(email: string): FilterType[] {
-    return [
-      {
-        field: "email",
-        value: email,
-        operator: "=",
-      },
-    ];
   }
 }

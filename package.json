@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "build:clean": "rm -r dist",
     "dev": "tsc-watch --onSuccess \"npm run start\"",
-    "start": "node dist/api/start.js"
+    "start": "\"npm run build\" & node dist/api/start.js"
   },
   "repository": {
     "type": "git",

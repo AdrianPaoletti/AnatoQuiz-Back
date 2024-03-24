@@ -1,4 +1,4 @@
-import { ValueObject } from "../../shared/domain/valueObjects/valueObject";
+import { ValueObject } from "../valueObjects/valueObject";
 
 export class UserEmail extends ValueObject<string> {
   constructor(value: string) {

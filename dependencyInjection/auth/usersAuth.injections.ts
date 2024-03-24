@@ -1,7 +1,7 @@
 import { Container } from "inversify";
 
+import { UserAuthenticatorGetController } from "../../controllers/auth/userAuthenticatorGet.controller";
 import { Controller } from "../../controllers/controller.interface";
-import { UserAuthenticatorGetController } from "../../controllers/userAuthenticatorGet.controller";
 import { UserAuthenticator } from "../../modules/auth/application/authenticate/userAuthenticator";
 import { UserAuthorizator } from "../../modules/auth/application/authorize/userAuthorizator";
 import { UserAuthRepository as IUserAuthenticatorRepository } from "../../modules/auth/domain/userAuthRepository.interface";

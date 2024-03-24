@@ -17,7 +17,15 @@ export class MongoQuestionRepository
     const documents = await this.searchByCriteria<IQuestion>(criteria);
 
     return documents.map(
-      ({ _id: id, subject, lesson, question, answers, difficulty, active }) => {
+      ({
+        _id: id,
+        subject,
+        lessons,
+        question,
+        answers,
+        difficulty,
+        active,
+      }) => {
         const questionAnswers = answers.map(({ _id: id, answer, correct }) => ({
           id,
           answer,
@@ -27,7 +35,7 @@ export class MongoQuestionRepository
         return Question.fromPrimitives({
           id,
           subject,
-          lesson,
+          lessons,
           question,
           answers: questionAnswers,
           difficulty,

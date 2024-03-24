@@ -3,13 +3,11 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { inject, injectable } from "inversify";
 
-import { SHARED_INJECTIONS_TYPES } from "../dependencyInjection/shared/shared.types";
-import { QuestionsFinderQuery } from "../modules/question/application/find/questionsFinderQuery";
-import { QuestionsResponse } from "../modules/question/application/questionsResponse";
-import { FilterType } from "../modules/shared/domain/criteria/filter";
-import { QueryBus } from "../modules/shared/domain/queryBus.interface";
-
-import { Controller } from "./controller.interface";
+import { SHARED_INJECTIONS_TYPES } from "../../dependencyInjection/shared/shared.types";
+import { QuestionsFinderQuery } from "../../modules/question/application/find/questionsFinderQuery";
+import { QuestionsResponse } from "../../modules/question/application/questionsResponse";
+import { QueryBus } from "../../modules/shared/domain/queryBus.interface";
+import { Controller } from "../controller.interface";
 
 const debug = Debug("anatoquiz:questionsGetController");
 
@@ -22,15 +20,16 @@ export class QuestionsGetController implements Controller {
 
   public async run(req: Request, res: Response): Promise<void> {
     try {
-      const { filters, orderBy, orderType, limit, offset } = req.query as {
-        [key: string]: string & FilterType[];
-      };
+      const { lessons, questionsNumber, orderBy, orderType, offset } =
+        req.query as {
+          [key: string]: string;
+        };
 
       const query = new QuestionsFinderQuery(
-        filters,
+        JSON.parse(lessons),
         orderBy,
         orderType,
-        limit ? +limit : undefined,
+        questionsNumber ? +questionsNumber : undefined,
         offset ? +offset : undefined,
       );
 
