@@ -28,6 +28,19 @@ export abstract class MongoDBRepository<T extends AggregateRoot> {
     });
   }
 
+  protected async update(id: string, aggregateRoot: T): Promise<void> {
+    const document = {
+      ...aggregateRoot.toPrimitives(),
+      _id: id,
+    };
+
+    await this.ModelDB.updateOne({}, document, { upsert: true }).catch(
+      (error) => {
+        throw new MongoDBError(error);
+      },
+    );
+  }
+
   protected async searchOneByCriteria<D>(
     criteria: Criteria,
   ): Promise<D | null> {

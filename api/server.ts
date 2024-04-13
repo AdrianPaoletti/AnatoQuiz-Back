@@ -12,6 +12,9 @@ import * as http from "http";
 import httpStatus from "http-status";
 
 import { container, registerContainer } from "../dependencyInjection";
+import { SHARED_INJECTIONS_TYPES } from "../dependencyInjection/shared/shared.types";
+import { DomainEventSubscribers } from "../modules/shared/infrastructure/eventBus/domainEventSubscribers";
+import { InMemoryAsyncEventBus } from "../modules/shared/infrastructure/eventBus/inMemory/inMemoryAsyncEventBus";
 import { registerRoutes } from "../routes";
 
 const debug = Debug("anatoquiz:server");
@@ -91,5 +94,13 @@ export class Server {
 
       resolve();
     });
+  }
+
+  async registerEventBus() {
+    const eventBus = container.get<InMemoryAsyncEventBus>(
+      SHARED_INJECTIONS_TYPES.InMemoryAsyncEventBus,
+    );
+
+    eventBus.addSubscribers(DomainEventSubscribers.from(container));
   }
 }

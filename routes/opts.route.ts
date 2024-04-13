@@ -16,6 +16,7 @@ export function register(app: Express) {
   app.put("/opt/create", (req: Request, res: Response) =>
     optCreatorPutController.run(req, res),
   );
+
   app.get("/opt/find", (req: Request, res: Response) =>
     optFinderGetController.run(req, res),
   );

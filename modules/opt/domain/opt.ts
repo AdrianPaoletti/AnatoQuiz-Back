@@ -1,9 +1,10 @@
 import { AggregateRoot } from "../../shared/domain/aggregateRoot";
+import { OPTValue } from "../../shared/domain/opt/optValue";
 import { UserEmail } from "../../shared/domain/user/userEmail";
 
+import { OPTCreatedDomainEvent } from "./optCreatedDomainEvent";
 import { OPTId } from "./optId";
 import { OPTPrimitives } from "./optPrimitives.interface";
-import { OPTValue } from "./optValue";
 
 export class OPT extends AggregateRoot {
   public readonly id: OPTId;
@@ -19,6 +20,14 @@ export class OPT extends AggregateRoot {
 
   static create(id: OPTId, email: UserEmail, value: OPTValue): OPT {
     const opt = new OPT(id, email, value);
+
+    opt.record(
+      new OPTCreatedDomainEvent({
+        aggregateId: opt.id.value,
+        email: opt.email.value,
+        value: opt.value.value,
+      }),
+    );
 
     return opt;
   }

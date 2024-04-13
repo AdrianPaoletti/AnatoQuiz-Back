@@ -10,11 +10,19 @@ export class DomainEventSubscribers implements IDomainEventSubscribers {
     public items: Array<DomainEventSubscriber<DomainEvent>>,
   ) {}
 
-  static from(container: Container): any {
-    const subscriberDefinitions = container.getAll(
-      SHARED_INJECTIONS_TYPES.DomainEventsSubscriber,
-    );
+  static from(container: Container): DomainEventSubscribers {
+    const subscriberDefinitions = container.getAll<
+      DomainEventSubscriber<DomainEvent>
+    >(SHARED_INJECTIONS_TYPES.DomainEventsSubscriber);
 
-    console.log("==========>", subscriberDefinitions);
+    return new DomainEventSubscribers(subscriberDefinitions);
+    // const subscribers: Array<DomainEventSubscriber<DomainEvent>> = [];
+
+    // subscriberDefinitions.forEach((value) => {
+    //   const domainEventSubscriber = container.get<
+    //     DomainEventSubscriber<DomainEvent>
+    //   >(key.toString());
+    //   console.log("yowww", value, key);
+    // });
   }
 }

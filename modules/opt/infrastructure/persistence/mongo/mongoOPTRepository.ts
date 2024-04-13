@@ -20,7 +20,7 @@ export class MongoOPTRepository
   implements OPTRepository
 {
   public async save(opt: OPT): Promise<void> {
-    await this.persist(opt.id.value, opt);
+    await this.update(opt.id.value, opt);
   }
 
   public async matchingOne(criteria: Criteria): Promise<OPT | null> {

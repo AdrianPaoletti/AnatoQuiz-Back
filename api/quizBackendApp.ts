@@ -15,6 +15,7 @@ export class QuizBackendApp {
 
     await this.server.listen();
     await this.database.connect();
+    await this.server.registerEventBus();
   }
 
   async stop(): Promise<void> {

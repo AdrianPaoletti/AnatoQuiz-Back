@@ -8,4 +8,5 @@ export const SHARED_INJECTIONS_TYPES = {
   AuthorizationMiddleware: Symbol.for("AuthorizationMiddleware"),
   ValidateJWT: Symbol.for("ValidateJWT"),
   DomainEventsSubscriber: Symbol.for("DomainEventsSubscriber"),
+  InMemoryAsyncEventBus: Symbol.for("InMemoryAsyncEventBus"),
 };
