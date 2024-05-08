@@ -13,6 +13,7 @@ type OPTCreatorPutRequest = Request & {
   body: {
     id: string;
     email: string;
+    subject: string;
   };
 };
 const debug = Debug("anatoquiz:OPTCreatorPutController");
@@ -26,10 +27,11 @@ export class OPTCreatorPutController implements Controller {
 
   public async run(req: OPTCreatorPutRequest, res: Response): Promise<void> {
     try {
-      const { id, email } = req.body;
+      const { id, email, subject } = req.body;
       const optCreatorCommand = new OPTCreatorCommand({
         id,
         email,
+        subject,
       });
 
       await this.inMemoryCommandBus.dispatch(optCreatorCommand);

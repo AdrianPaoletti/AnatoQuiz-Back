@@ -1,4 +1,5 @@
 import { AggregateRoot } from "../../shared/domain/aggregateRoot";
+import { OPTSubject } from "../../shared/domain/opt/optSubject";
 import { OPTValue } from "../../shared/domain/opt/optValue";
 import { UserEmail } from "../../shared/domain/user/userEmail";
 
@@ -10,22 +11,35 @@ export class OPT extends AggregateRoot {
   public readonly id: OPTId;
   public readonly email: UserEmail;
   public readonly value: OPTValue;
+  public readonly subject: OPTSubject;
 
-  constructor(id: OPTId, email: UserEmail, value: OPTValue) {
+  constructor(
+    id: OPTId,
+    email: UserEmail,
+    value: OPTValue,
+    subject: OPTSubject,
+  ) {
     super();
     this.id = id;
     this.email = email;
     this.value = value;
+    this.subject = subject;
   }
 
-  static create(id: OPTId, email: UserEmail, value: OPTValue): OPT {
-    const opt = new OPT(id, email, value);
+  static create(
+    id: OPTId,
+    email: UserEmail,
+    value: OPTValue,
+    subject: OPTSubject,
+  ): OPT {
+    const opt = new OPT(id, email, value, subject);
 
     opt.record(
       new OPTCreatedDomainEvent({
         aggregateId: opt.id.value,
         email: opt.email.value,
         value: opt.value.value,
+        subject: opt.subject.value,
       }),
     );
 
@@ -40,8 +54,13 @@ export class OPT extends AggregateRoot {
     return new OPTValue(value.join(""));
   }
 
-  static fromPrimitives({ id, email, value }: OPTPrimitives): OPT {
-    return new OPT(new OPTId(id), new UserEmail(email), new OPTValue(value));
+  static fromPrimitives({ id, email, value, subject }: OPTPrimitives): OPT {
+    return new OPT(
+      new OPTId(id),
+      new UserEmail(email),
+      new OPTValue(value),
+      new OPTSubject(subject),
+    );
   }
 
   public toPrimitives() {
@@ -49,6 +68,7 @@ export class OPT extends AggregateRoot {
       id: this.id.value,
       email: this.email.value,
       value: this.value.value,
+      subject: this.subject.value,
     };
   }
 }

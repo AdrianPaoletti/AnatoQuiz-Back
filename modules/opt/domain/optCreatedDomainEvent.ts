@@ -3,6 +3,7 @@ import { DomainEvent } from "../../shared/domain/domainEvent";
 type OPTCreatedDomainEventAttributes = {
   readonly email: string;
   readonly value: string;
+  readonly subject: string;
 };
 
 export class OPTCreatedDomainEvent extends DomainEvent {
@@ -10,11 +11,13 @@ export class OPTCreatedDomainEvent extends DomainEvent {
 
   readonly email: string;
   readonly value: string;
+  readonly subject: string;
 
   constructor({
     aggregateId,
     email,
     value,
+    subject,
     eventId,
     occurredOn,
   }: {
@@ -22,6 +25,7 @@ export class OPTCreatedDomainEvent extends DomainEvent {
     eventId?: string;
     email: string;
     value: string;
+    subject: string;
     occurredOn?: Date;
   }) {
     super({
@@ -32,6 +36,7 @@ export class OPTCreatedDomainEvent extends DomainEvent {
     });
     this.email = email;
     this.value = value;
+    this.subject = subject;
   }
 
   static fromPrimitives(params: {
@@ -46,17 +51,19 @@ export class OPTCreatedDomainEvent extends DomainEvent {
       aggregateId,
       email: attributes.email,
       value: attributes.value,
+      subject: attributes.subject,
       eventId,
       occurredOn,
     });
   }
 
   toPrimitives(): OPTCreatedDomainEventAttributes {
-    const { email, value } = this;
+    const { email, value, subject } = this;
 
     return {
       email,
       value,
+      subject,
     };
   }
 }

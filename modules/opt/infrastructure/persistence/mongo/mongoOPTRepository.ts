@@ -12,6 +12,7 @@ interface OPTDocument {
   _id: string;
   email: string;
   value: string;
+  subject: string;
 }
 
 @injectable()
@@ -27,12 +28,13 @@ export class MongoOPTRepository
     const document = await this.searchOneByCriteria<OPTDocument>(criteria);
 
     if (document) {
-      const { _id: id, email, value } = document;
+      const { _id: id, email, value, subject } = document;
 
       return OPT.fromPrimitives({
         id,
         email,
         value,
+        subject,
       });
     }
 

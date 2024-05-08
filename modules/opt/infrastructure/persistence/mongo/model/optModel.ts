@@ -4,6 +4,7 @@ export interface IOPT {
   _id: string;
   email: string;
   value: string;
+  subject: string;
 }
 
 const optSchema: Schema<IOPT> = new Schema(
@@ -11,6 +12,7 @@ const optSchema: Schema<IOPT> = new Schema(
     _id: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     value: { type: String, required: true },
+    subject: { type: String, required: true },
   },
   {
     versionKey: false,

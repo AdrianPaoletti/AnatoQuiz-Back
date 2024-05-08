@@ -4,6 +4,7 @@ import { NOTIFICATIONS_INJECTIONS_TYPES } from "../../../../dependencyInjection/
 import { OPTCreatedDomainEvent } from "../../../opt/domain/optCreatedDomainEvent";
 import { DomainEventClass } from "../../../shared/domain/domainEvent";
 import { DomainEventSubscriber } from "../../../shared/domain/domainEventSubscriber";
+import { OPTSubject } from "../../../shared/domain/opt/optSubject";
 import { OPTValue } from "../../../shared/domain/opt/optValue";
 import { UserEmail } from "../../../shared/domain/user/userEmail";
 
@@ -22,7 +23,11 @@ export class EmailSenderOnOPTCreated
     return [OPTCreatedDomainEvent];
   }
 
-  async on({ email, value }: OPTCreatedDomainEvent) {
-    this.emailSender.run(new UserEmail(email), new OPTValue(value));
+  async on({ email, value, subject }: OPTCreatedDomainEvent) {
+    this.emailSender.run(
+      new UserEmail(email),
+      new OPTValue(value),
+      new OPTSubject(subject),
+    );
   }
 }
